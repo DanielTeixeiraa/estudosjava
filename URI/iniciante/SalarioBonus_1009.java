@@ -1,8 +1,6 @@
-package uri.iniciante;
-
 import java.util.Scanner;
 
-public class SalarioBonus_1009 {
+public class main {
 
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);

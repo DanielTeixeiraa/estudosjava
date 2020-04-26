@@ -1,7 +1,5 @@
-package uri.iniciante;
-
 import java.util.Scanner;
-public class ProdutoSimples_1004 {
+public class Main {
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
         int A = scan.nextInt();
