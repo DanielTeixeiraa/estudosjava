@@ -1,5 +1,7 @@
+package uri.iniciante;
+
 import java.util.Scanner;
-public class Main {
+public class SomaSimples_1003 {
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
         int A = scan.nextInt();

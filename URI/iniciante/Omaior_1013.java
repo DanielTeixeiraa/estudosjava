@@ -1,6 +1,9 @@
+
+package uri.iniciante;
+
 import java.util.Scanner;
 
-public class Main {
+public class Omaior_1013 {
     public static void main(String args[]) {
 		Scanner scan = new Scanner(System.in);
 		

@@ -1,6 +1,9 @@
+
+package uri.iniciante;
+
 import java.util.Scanner;
 
-public class Main {
+public class Consumo_1014 {
         public static void main(String[] args) {
         
     

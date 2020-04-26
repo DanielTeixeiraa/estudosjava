@@ -1,6 +1,8 @@
+package uri.iniciante;
+
 import java.util.Scanner;
 
-public class Main {
+public class Esfera_1011 {
     public static void main(String[] args) {
         
     

@@ -1,5 +1,7 @@
+package uri.iniciante;
+
 import java.util.Scanner;
-public class Main {
+public class NumeroDecrescente {
     public static void main(String[] args) {
         Scanner say = new Scanner(System.in);
         int b = 0;

@@ -1,6 +1,8 @@
+package uri.iniciante;
+
 import java.util.Scanner;
 
-public class Main {
+public class Diferença_1007 {
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
         int A = scan.nextInt();

@@ -1,5 +1,6 @@
+package uri.iniciante;
 import java.util.*;
-public class Main {
+public class AreaDoCirculo_1002 {
 
 	public static void main(String args[]){
 		Scanner scan = new Scanner(System.in);
