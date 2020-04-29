@@ -60,14 +60,24 @@ public class Luta {
             limpatela();
             System.out.println("VOCE: " + Escolher1.getNome());
             System.out.println("HP " + Escolher1.getHp());
+            System.out.println("MANA: " + Escolher1.getMana());
             System.out.println("----------------------------------");
             System.out.println("BOT " + bot.getNome());
             System.out.println("HP " + bot.getHp());
+            System.out.println("MANA: " + bot.getMana());
             System.out.println("\n");
-            System.out.println("ESCOLHA AÇAO\n (1)ATAQUE (2)DEFESA ");
-            a = scan.nextInt();
+            if (Escolher1.getMana() > 0) {
+                System.out.println("ESCOLHA AÇAO\n (1)ATAQUE (2)DEFESA ");
+                a = scan.nextInt();
+            } else {
+                System.out.println("VOCE NAO TEM MAIS MANA. SE DEFENDENDO AUTOMATICAMENTE");
+                a = 2;
+                Thread.sleep(2500);
+            }
+
             limpatela();
             setY();
+            limpatela();
             switch (a) {
                 case 1:
                     System.out.println("HABILIDADES");
@@ -79,13 +89,16 @@ public class Luta {
                     switch (x) {
                         case 1:
                             bot.setHp(bot.getHp() - 100);
+                            Escolher1.setMana(Escolher1.getMana() - 1);
                             System.out.println("voce usou " + Escolher1.getHb1() + " e deu " + Escolher1.getD1() + " dano \n");
                             break;
                         case 2:
                             bot.setHp(bot.getHp() - 200);
+                            Escolher1.setMana(Escolher1.getMana() - 2);
                             System.out.println("voce usou " + Escolher1.getHb2() + " e deu " + Escolher1.getD2() + " dano \n");
                             break;
                         case 3:
+                            Escolher1.setMana(Escolher1.getMana() - 3);
                             bot.setHp(bot.getHp() - 300);
                             System.out.println("voce usou " + Escolher1.getHb2() + " e deu " + Escolher1.getD3() + " dano \n");
                             break;
@@ -96,6 +109,7 @@ public class Luta {
                     break;
 
                 case 2:
+                    Escolher1.setMana(Escolher1.getMana() + 1);
                     this.lutabot();
                     switch (this.getY()) {
                         case 0:
@@ -121,23 +135,26 @@ public class Luta {
     }
 
     public void lutabot() throws InterruptedException {
-        //  y = gerador.nextInt(2);
         switch (this.getY()) {
             case 0:
                 switch (a) {
                     case 1:
+                        bot.setMana(bot.getMana() + 1);
                         switch (x) {
                             case 1:
                                 System.out.println("O BOT SE DEFENDEU E RECEBEU 50 DE DANO\n");
                                 bot.setHp(bot.getHp() + 50);
+                                bot.setMana(bot.getMana() - 1);
                                 break;
                             case 2:
                                 System.out.println("O BOT SE DEFENDEU E RECEBEU 100 DE DANO\n");
                                 bot.setHp(bot.getHp() + 100);
+                                bot.setMana(bot.getMana() - 2);
                                 break;
                             case 3:
                                 System.out.println("O BOT SE DEFENDEU RECEBEU 150 DE DANO\n");
                                 bot.setHp(bot.getHp() + 150);
+                                bot.setMana(bot.getMana() - 3);
                                 break;
                         }
                         break;
@@ -147,14 +164,17 @@ public class Luta {
                 }
             case 1:
                 Escolher1.setHp(Escolher1.getHp() - 100);
+                bot.setMana(bot.getMana() - 1);
                 System.out.println("o bot usou " + bot.getHb1() + " e deu " + bot.getD1() + " dano \n");
                 break;
             case 2:
                 Escolher1.setHp(Escolher1.getHp() - 200);
+                bot.setMana(bot.getMana() - 2);
                 System.out.println("o bot usou " + bot.getHb2() + " e deu " + bot.getD2() + " dano \n");
                 break;
             case 3:
                 Escolher1.setHp(Escolher1.getHp() - 300);
+                bot.setMana(bot.getMana() - 3);
                 System.out.println("o bot usou " + bot.getHb2() + " e deu " + bot.getD3() + " dano \n");
                 break;
 

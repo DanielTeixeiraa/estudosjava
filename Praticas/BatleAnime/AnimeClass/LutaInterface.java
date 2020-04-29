@@ -43,65 +43,80 @@ public class LutaInterface {
     public void luta() throws InterruptedException {
         int a = 0;
         int b = 0;
-        do{
-        limpatela();
-        System.out.println("VOCE: " + Escolher1.getNome());
-        System.out.println("HP " + Escolher1.getHp());
-        System.out.println("----------------------------------");
-        System.out.println("BOT " + bot.getNome());
-        System.out.println("HP " + bot.getHp());
-        System.out.println("\n");
-        System.out.println("ESCOLHA AÇAO\n (1)ATAQUE ");
-        a = scan.nextInt();
-        limpatela();
-        switch (a) {
-            case 1:
-                System.out.println("HABILIDADES");
-                System.out.println(Escolher1.getHb1() + " DANO " + Escolher1.getD1());
-                System.out.println(Escolher1.getHb2() + " DANO " + Escolher1.getD2());
-                System.out.println(Escolher1.getHb3() + " DANO " + Escolher1.getD3());
-                System.out.println("ESCOLHA(1,2 OU 3) ");
-                switch (scan.nextInt()) {
-                    case 1:
-                        bot.setHp(bot.getHp()-100);
-                        System.out.println("VOCE USOU "+Escolher1.getHb1() + "E DEU " + Escolher1.getD1() +"DANO ");
-                        break;
-                    case 2:
-                        bot.setHp(bot.getHp()-200);
-                        System.out.println("VOCE USOU "+Escolher1.getHb2() + "E DEU " + Escolher1.getD2() +"DANO ");
-                        break;
-                    case 3:
-                        bot.setHp(bot.getHp()-300);
-                        System.out.println("VOCE USOU "+Escolher1.getHb2() + "E DEU " + Escolher1.getD3() +"DANO ");
-                        break;
+        do {
+            limpatela();
+            System.out.println("VOCE: " + Escolher1.getNome());
+            System.out.println("HP " + Escolher1.getHp());
+            System.out.println("----------------------------------");
+            System.out.println("BOT " + bot.getNome());
+            System.out.println("HP " + bot.getHp());
+            System.out.println("\n");
+            if (Escolher1.getMana() > 0) {
+                System.out.println("ESCOLHA AÇAO\n (1)ATAQUE (2)DEFESA");
+                a = scan.nextInt();
+            } else {
+                System.out.println("VOCE NAO TEM MANA. SE DEFENDENDO AUTOMATICAMNETE");
+                a = 2;
+                Thread.sleep(1500);
+            }
+            limpatela();
+            switch (a) {
+                case 1:
+                    System.out.println("HABILIDADES");
+                    System.out.println(Escolher1.getHb1() + " DANO " + Escolher1.getD1());
+                    System.out.println(Escolher1.getHb2() + " DANO " + Escolher1.getD2());
+                    System.out.println(Escolher1.getHb3() + " DANO " + Escolher1.getD3());
+                    System.out.println("ESCOLHA(1,2 OU 3) ");
+                    b = scan.nextInt();
+                    while (b == 3 || Escolher1.getMana() < 3) {
+                        System.out.println("VOCE NAO TEM MANA\n ESCOLHA OUTRA HABILIDADE DISPONIVEL");
+                        b = scan.nextInt();
+                    }
+                    while (b == 2 && Escolher1.getMana() < 1) {
+                        System.out.println("VOCE NAO TEM MANA\n USANDO A UNICA HABILIDADE DISPONIVEL");
+                        b = 1;
+                    }
 
-                }   
-        }
-                Thread.sleep(2500);
-                this.lutabot();
-    }while (this.Escolher1.getHp()>= 0 && this.bot.getHp() >= 0);
+                    switch (b) {
+                        case 1:
+                            bot.setHp(bot.getHp() - 100);
+                            System.out.println("VOCE USOU " + Escolher1.getHb1() + "E DEU " + Escolher1.getD1() + "DANO ");
+                            break;
+                        case 2:
+                            bot.setHp(bot.getHp() - 200);
+                            System.out.println("VOCE USOU " + Escolher1.getHb2() + "E DEU " + Escolher1.getD2() + "DANO ");
+                            break;
+                        case 3:
+                            bot.setHp(bot.getHp() - 300);
+                            System.out.println("VOCE USOU " + Escolher1.getHb2() + "E DEU " + Escolher1.getD3() + "DANO ");
+                            break;
+
+                    }
+            }
+            Thread.sleep(2500);
+            this.lutabot();
+        } while (this.Escolher1.getHp() >= 0 && this.bot.getHp() >= 0);
     }
-    
-    public void lutabot() throws InterruptedException{
+
+    public void lutabot() throws InterruptedException {
         int y = gerador.nextInt(2);
         switch (y) {
-                    case 0:
-                        Escolher1.setHp(Escolher1.getHp()-100);
-                        System.out.println("O BOT USOU "+bot.getHb1() + "E DEU " + bot.getD1() +"DANO ");
-                        break;
-                    case 1:
-                        Escolher1.setHp(Escolher1.getHp()-200);
-                        System.out.println("O BOT USOU "+bot.getHb2() + "E DEU " + bot.getD2() +"DANO ");
-                        break;
-                    case 2:
-                        Escolher1.setHp(Escolher1.getHp()-300);
-                        System.out.println("O BOT USOU "+bot.getHb2() + "E DEU " + bot.getD3() +"DANO ");
-                        break;
+            case 0:
+                Escolher1.setHp(Escolher1.getHp() - 100);
+                System.out.println("O BOT USOU " + bot.getHb1() + "E DEU " + bot.getD1() + "DANO ");
+                break;
+            case 1:
+                Escolher1.setHp(Escolher1.getHp() - 200);
+                System.out.println("O BOT USOU " + bot.getHb2() + "E DEU " + bot.getD2() + "DANO ");
+                break;
+            case 2:
+                Escolher1.setHp(Escolher1.getHp() - 300);
+                System.out.println("O BOT USOU " + bot.getHb2() + "E DEU " + bot.getD3() + "DANO ");
+                break;
 
-                }
+        }
         Thread.sleep(2500);
     }
-    
 
     public void Bot() {
         this.bot = bots[gerador.nextInt(2)];
@@ -127,7 +142,4 @@ public class LutaInterface {
         this.bot = bot;
     }
 
- 
-   
-    
 }
