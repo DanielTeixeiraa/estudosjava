@@ -7,7 +7,7 @@ import java.util.Scanner;
 public class Luta {
 
     public static int a = 0;
-    public int y;
+    public static int y;
     public static int x = 0;
     Scanner scan = new Scanner(System.in);
     Random gerador = new Random();
@@ -23,7 +23,7 @@ public class Luta {
     }
 
     public void setY() {
-        y = (int) gerador.nextInt(4);
+        y =  gerador.nextInt(4);
     }
 
     public int getY() {
@@ -53,11 +53,9 @@ public class Luta {
     }
 
     public void luta() throws InterruptedException {
-        int a = 0;
         int b = 0;
-        //int y = gerador.nextInt(2);
-        do {
-            limpatela();
+        while (this.Escolher1.getHp() >= 0 && this.bot.getHp() >= 0) {
+           // limpatela();
             System.out.println("VOCE: " + Escolher1.getNome());
             System.out.println("HP " + Escolher1.getHp());
             System.out.println("MANA: " + Escolher1.getMana());
@@ -75,9 +73,9 @@ public class Luta {
                 Thread.sleep(2500);
             }
 
-            limpatela();
+            //limpatela();
             setY();
-            limpatela();
+            //limpatela();
             switch (a) {
                 case 1:
                     System.out.println("HABILIDADES");
@@ -86,6 +84,15 @@ public class Luta {
                     System.out.println(Escolher1.getHb3() + " DANO " + Escolher1.getD3());
                     System.out.println("ESCOLHA(1,2 OU 3) ");
                     x = scan.nextInt();
+                    while(x == 3 && Escolher1.getMana() < 3){
+                        System.out.println("VOCE NAO TEM MANA SUFICIENTE\n ESCOLHA OUTRA HABILIDADE");
+                        x = scan.nextInt();
+                    }
+                    while(x == 2 && Escolher1.getMana() < 2){
+                        System.out.println("VOCE NAO TEM MANA SUFICIENTE\n USADO A HABILIDADE 1");
+                         Thread.sleep(1500);
+                        x = 1;
+                    }
                     switch (x) {
                         case 1:
                             bot.setHp(bot.getHp() - 100);
@@ -109,11 +116,12 @@ public class Luta {
                     break;
 
                 case 2:
-                    Escolher1.setMana(Escolher1.getMana() + 1);
                     this.lutabot();
+                    Escolher1.setMana(Escolher1.getMana() + 1);
                     switch (this.getY()) {
                         case 0:
-                            System.out.println("VOCE NAO RECEBEU NENHUM DANO\n");
+                            System.out.println("VOCE NAO RECEBEU NENHUM DANO\nO BOT NAO DEU DANO");
+                            bot.setMana(bot.getMana() + 1);
                             break;
                         case 1:
                             System.out.println("VOCE SE DEFENDEU E RECEBEU 50 DE DANO\n");
@@ -131,37 +139,49 @@ public class Luta {
                     Thread.sleep(2500);
                     break;
             }
-        } while (this.Escolher1.getHp() >= 0 && this.bot.getHp() >= 0);
+        }
     }
 
     public void lutabot() throws InterruptedException {
+        while(this.getY() == 3 && bot.getMana() < 3){
+            this.setY();
+        }
+        if(this.getY() == 2 && bot.getMana() < 2){
+            setY(1);
+        }
+        if(bot.getMana() == 0 && this.getY() > 0){
+            setY(0);      
+        }
+//        while (bot.getMana() > 0 && this.getY() == 2 && this.getY() == 1){
+//            this.setY();
+//        }
         switch (this.getY()) {
             case 0:
                 switch (a) {
                     case 1:
-                        bot.setMana(bot.getMana() + 1);
                         switch (x) {
                             case 1:
                                 System.out.println("O BOT SE DEFENDEU E RECEBEU 50 DE DANO\n");
                                 bot.setHp(bot.getHp() + 50);
-                                bot.setMana(bot.getMana() - 1);
+                                bot.setMana(bot.getMana() + 1);
                                 break;
                             case 2:
                                 System.out.println("O BOT SE DEFENDEU E RECEBEU 100 DE DANO\n");
                                 bot.setHp(bot.getHp() + 100);
-                                bot.setMana(bot.getMana() - 2);
+                                bot.setMana(bot.getMana() + 1);
                                 break;
                             case 3:
                                 System.out.println("O BOT SE DEFENDEU RECEBEU 150 DE DANO\n");
                                 bot.setHp(bot.getHp() + 150);
-                                bot.setMana(bot.getMana() - 3);
+                                bot.setMana(bot.getMana() + 1);
                                 break;
                         }
                         break;
-                    case 2:
-                        System.out.println("O BOT SE DEFENDEU E NAO RECEBEU NENHUM DANO\n");
-                        break;
+//                    case 2:
+//                        System.out.println("O BOT SE DEFENDEU E NAO RECEBEU NENHUM DANO\n");
+                      // break;
                 }
+                break;
             case 1:
                 Escolher1.setHp(Escolher1.getHp() - 100);
                 bot.setMana(bot.getMana() - 1);
@@ -206,4 +226,10 @@ public class Luta {
         this.bot = bot;
     }
 
+    public static void setY(int y) {
+        Luta.y = y;
+    }
+
+    
+    
 }
